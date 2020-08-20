@@ -3,18 +3,22 @@
 
 
 module.exports = {
-  "src_folders" : ["tests"],
+  src_folders : ['tests'],
+  globals_path: 'build/src/globals/globals',
+  page_objects_path: pageObjectsPath,
+  custom_assertions_path: 'build/src/custom_assertions',
+  custom_commands_path: 'build/src/custom_commands',
 
-      "webdriver" : {
-    "start_process": true,
-        "server_path": "node_modules/.bin/chromedriver",
-        "port": 4444
+      webdriver : {
+    start_process: true,
+        server_path: 'node_modules/.bin/chromedriver',
+        port: 4444
   },
 
-  "test_settings" : {
-    "default" : {
-      "desiredCapabilities": {
-        "browserName": "chrome"
+  test_settings : {
+    default : {
+      desiredCapabilities: {
+        browserName: 'chrome'
       }
     }
   }
