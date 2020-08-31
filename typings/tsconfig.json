@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "compilerOptions": {
+    "outDir": "./build", // Redirect output structure to the directory
+    "module": "esnext",
+    "target": "esnext",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2016", "dom"],
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "rootDir": "./",
+    "jsx": "react",
+    "pretty": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types", "manual_definitions"],
+    "noErrorTruncation": true
+  },
+  "include": ["./global.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": [
+    "bin",
+    "node_modules",
+    "../node_modules",
+    "**/*-test.tsx",
+    "**/*-test.ts"
+  ]
+}
