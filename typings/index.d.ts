@@ -21,7 +21,6 @@ declare module 'nightwatch' {
         app: IApp;
         browserUrl: IBrowserUrlConfig;
         defaults: IDefaults;
-        ogApi: IOgApiConfig;
         temp: ITemp;
     }
 }

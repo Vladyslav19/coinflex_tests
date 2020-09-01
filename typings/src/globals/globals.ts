@@ -1,64 +1,24 @@
-import { hrTestData, IHRTestData } from './test_data/test_data';
-
 interface IApp {
-    financials: {
+    coinflex: {
         adminUserId: string;
         loginPassword: string;
     };
 }
 
 const appConfig: IApp = {
-    financials: {
+    coinflex: {
         /** Financials admin user id for logging into financials */
-        adminUserId: `${process.env.FINANCIALS_ADMIN_USER_ID}`,
+        adminUserId: `${process.env.USER_ID}`,
         /** Password used for logging into financials. */
-        loginPassword: `${process.env.FINANCIALS_TEST_PASSWORD}`
+        loginPassword: `${process.env.PASSWORD}`
     }
 };
 
 interface IBrowserUrlConfig {
-    financialsLogin: string;
-    financialsRootUrl: string;
+    coinflexRootUrl: string;
 }
 const browserUrlConfig: IBrowserUrlConfig = {
-    financialsLogin: `${process.env.AUTH_PROTOCOL}://${process.env.FINANCIALS_ENTITY}.fms.${
-        process.env.FINANCIALS_TEST_ENV
-    }/login.aspx`,
-    financialsRootUrl: `${process.env.AUTH_PROTOCOL}://${process.env.FINANCIALS_ENTITY}.fms.${
-        process.env.FINANCIALS_TEST_ENV
-    }/stw_php/`
-};
-
-interface IFinancials  extends IHRTestData {
-    listOptionsQuantity: number;
-    journal_entries: {
-        id: string,
-        description: string,
-        isPosted: boolean
-    };
-    spooler: {
-        jobName: string;
-    };
-}
-
-export interface ITemp {
-    financials: IFinancials;
-}
-
-let tempConfig: ITemp;
-tempConfig = {
-    financials: {
-        listOptionsQuantity: null,
-        ...hrTestData,
-        journal_entries: {
-            id: '',
-            description: '',
-            isPosted: false
-        },
-        spooler: {
-            jobName: ''
-        }
-    }
+    coinflexRootUrl: `${process.env.AUTH_PROTOCOL}://${process.env.INSTANCE_NAME}.coinflex.com`
 };
 
 
@@ -93,6 +53,5 @@ module.exports = {
 
     app: appConfig,
     browserUrl: browserUrlConfig,
-    temp: tempConfig,
     defaults: defaultConfig
 };
