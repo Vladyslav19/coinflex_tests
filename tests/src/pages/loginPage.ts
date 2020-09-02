@@ -1,10 +1,11 @@
 //import { client } from 'nightwatch-api';
 
-//import { NightwatchBrowser } from 'nightwatch';
+import { NightwatchBrowser } from 'nightwatch';
 
-//import { INightwatchPageObjects } from '../../../typings';
+import { INightwatchPageObjects } from '../../../typings';
 
-const fetch = require("node-fetch");
+import { fetch } from 'node-fetch';
+
 const commands = {
     async loginViaAPI () {
         fetch('https://api-options-demo.coinflex.com/api/autotest-sessions', {
@@ -18,16 +19,34 @@ const commands = {
                 'scheme': 'https',
             },
             body:{
-                user: {
-
+                user :{
+                    email: `${process.env.USER_ID}`,
+                    password: `${process.env.PASSWORD}`,
                 }
             }
             }).then(res => {
                 console.log(res);
             });
+    },
+
+    async openPage(browser: NightwatchBrowser) {
+        await browser.page
+            .CoinflexLoginPage()
     }
 }
 
+interface ICoinflexLoginPageObject extends INightwatchPageObjects {
+    elements: {}
+}
 
+const loginPage: ICoinflexLoginPageObject = {
+    url() {
+        return process.env.coinflexRootUrl;
+    },
+    elements: {},
+    commands: [commands]
+};
 
+// Nightwatch does not support es6 default exports so we have to do it this way
 
+module.exports = loginPage
