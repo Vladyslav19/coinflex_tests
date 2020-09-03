@@ -4,12 +4,10 @@
 
 module.exports = {
   src_folders : ['tests'],
-  globals_path: 'build/src/globals/globals',
-  page_objects_path: pageObjectsPath,
-  custom_assertions_path: 'build/src/custom_assertions',
-  custom_commands_path: 'build/src/custom_commands',
+  globals_path: 'tests/src/globals/globals.js',
+  page_objects_path: 'tests/src/pages',
 
-      webdriver : {
+  webdriver : {
     start_process: true,
         server_path: 'node_modules/.bin/chromedriver',
         port: 4444
