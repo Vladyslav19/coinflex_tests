@@ -4,7 +4,7 @@
   "description": "e2e tests for the coinflex project",
   "main": "nightwatch.conf.js",
   "scripts": {
-    "run-test": "cucumber-js --require cucumber.conf.js --require step-definitions --format node_modules/cucumber-pretty",
+    "e2e-test": "cucumber-js --require cucumber.conf.js --require step-definitions --format node_modules/cucumber-pretty",
     "test": "nightwatch"
   },
   "author": "",
@@ -16,6 +16,7 @@
     "env2": "^2.2.2",
     "geckodriver": "^1.20.0",
     "nightwatch": "^1.3.7",
-    "nightwatch-api": "^3.0.1"
+    "nightwatch-api": "^3.0.1",
+    "node-fetch": "^2.6.0"
   }
 }
