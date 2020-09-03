@@ -1,6 +1,7 @@
 
+const fetch = require('fetch');
 
-const commands: {
+const commands = {
     async loginViaAPI () {
     fetch('https://api-options-demo.coinflex.com/api/autotest-sessions', {
         method: 'POST',
@@ -22,4 +23,10 @@ const commands: {
     console.log(res);
 });
 },
+}
+
+module.exports = {
+
+    elements: {},
+    commands: [commands]
 }
