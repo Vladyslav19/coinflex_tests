@@ -1,10 +1,8 @@
 const { client } = require('nightwatch-api');
 const {Then } = require('cucumber');
 
-Then(/^the title is "([^"]*)"$/, title => {
-    return client.assert.title(title);
+Then(/^The main page open$/, async()=> {
+        const page = client.page.loginPage()
+        page.openMainPage(client);
 });
 
-Then(/^the Google search form exists$/, () => {
-    return client.assert.visible('input[name="q"]');
-});

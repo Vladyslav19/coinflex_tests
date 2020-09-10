@@ -1,26 +1,49 @@
- const fetch = require('node-fetch');
+const axios = require('axios');
+const fs = require('fs');
+
+
+// Check that the .env file exists as environment variables declared there are used to set values in the
+// ... global object initialized by nightwatch
+if (fs.existsSync('.env') === false)
+    throw Error('No .env file found! Please create a .env file. For further information please read the README.md');
+// Now we can require env2 since we know the .env file exists
+require('env2')('.env');
 
 const commands = {
-    async loginViaAPI() {
-        fetch('https://api-options-demo.coinflex.com/api/autotest-sessions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: {
-                user: {
-                    email: 'vradko@strongqa.com',
-                    password: 'Vladok190294',
-                }
+    async getAuthToken() {
+        axios.post('https://api-options-demo.coinflex.com/api/autotest-sessions', {
+            user: {
+                email: `${process.env.USER_ID}`,
+                password: `${process.env.PASSWORD}`
             }
-        }).then(res => {
-            console.log(res);
-        });
+        })
+            .then(response => {
+                return JSON.parse(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
     },
+    async setAuthCookies(browser){
+       const data = await this.getAuthToken();
+       console.log('!!!', data);
+       browser.setCookie({
+           name: 'cfo_token_demo',
+           value: data
+       })
+    },
+    async openMainPage() {
+        await this
+            .navigate()
+            .waitForElementVisible('@chart');
+    }
 }
 
 module.exports = {
-
-    elements: {},
-    commands
+    url: 'https://trading-options-demo.coinflex.com/',
+    elements: {
+        chart: '#styles_chart__tR87p'
+    },
+    commands: [commands]
 }

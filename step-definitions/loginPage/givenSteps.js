@@ -1,7 +1,6 @@
 const { client } = require('nightwatch-api');
 const { Given} = require('cucumber');
 
-Given(/^I open Google's search page$/, async () => {
-   await client.page.loginPage().loginViaAPI();
-    client.url('http://google.com').waitForElementVisible('body', 1000);
+Given(/^I am logged in via API$/, async () => {
+   await client.page.loginPage().setAuthCookies(client);
 });
