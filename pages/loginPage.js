@@ -11,26 +11,29 @@ require('env2')('.env');
 
 const commands = {
     async getAuthToken() {
-        axios.post('https://api-options-demo.coinflex.com/api/autotest-sessions', {
+        return await axios.post('https://api-options-demo.coinflex.com/api/autotest-sessions', {
             user: {
                 email: `${process.env.USER_ID}`,
                 password: `${process.env.PASSWORD}`
             }
         })
-            .then(response => {
-                return JSON.parse(response.data);
+            .then(async response => {
+                   return response.data.data.token;
             })
             .catch(function (error) {
-                console.log(error);
+                throw Error(error);
             });
-
     },
     async setAuthCookies(browser){
+        await browser.url('https://options-demo.coinflex.com/login.html');
        const data = await this.getAuthToken();
-       console.log('!!!', data);
        browser.setCookie({
-           name: 'cfo_token_demo',
-           value: data
+           name : "__cfduid",
+           value : data,
+           domain : ".coinflex.com",
+           path : "/",
+           httpOnly : true,
+           secure   : true,
        })
     },
     async openMainPage() {
@@ -43,7 +46,8 @@ const commands = {
 module.exports = {
     url: 'https://trading-options-demo.coinflex.com/',
     elements: {
-        chart: '#styles_chart__tR87p'
+        chart: '#styles_chart__tR87p',
+        email: '#login:email'
     },
     commands: [commands]
 }
