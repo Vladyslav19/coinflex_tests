@@ -28,12 +28,12 @@ const commands = {
         await browser.url('https://options-demo.coinflex.com/login.html');
        const data = await this.getAuthToken();
        browser.setCookie({
-           name : "__cfduid",
+           name : "cfo_token_demo",
            value : data,
            domain : ".coinflex.com",
            path : "/",
-           httpOnly : true,
-           secure   : true,
+           httpOnly : false,
+           secure   : false,
        })
     },
     async openMainPage() {
