@@ -3,4 +3,3 @@ tests_output
 node_modules
 .idea
 *.log
-chromedriver.log
