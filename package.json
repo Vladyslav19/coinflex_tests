@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.20.0",
-    "chromedriver": "^84.0.1",
+    "chromedriver": "86.0.0",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
     "env2": "^2.2.2",
