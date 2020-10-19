@@ -1,19 +1,17 @@
 module.exports = {
+    url: 'https://trading-options-demo.coinflex.com/',
     elements: {
         timeFrameSelector: 'input[class=styles_time__input]',
-        timeFrameValue: 'styles_time__item[value=`5 minutes`]'
-
-
+        chart: '#styles_chart__tR87p'
     },
 
     commands: [{
-        setTimeFrame(selector, value) {
-            return this
-                .click(selector)
-                .click('@timeFrameSelector[value=`${value}`]')
+        setTimeFrame(frameValue) {
+            this.click('@timeFrameSelector');
+            this.waitForElementVisible('@timeFrameSelector');
+            this.page.mainPage.getElementByText('@timeFrameSelector', frameValue)
         },
-
-        getElementByText(selector,text) {
+        getElementByText(selector, text) {
             let element = null;
             client.pause(1000);
             this.elements('css selector', selector, function (elements) {
@@ -40,6 +38,11 @@ module.exports = {
                     this.elementIdClick(element);
                 }
             })
+        },
+        async openMainPage() {
+            await this
+                .navigate()
+                .waitForElementVisible('@chart');
         }
     }]
 

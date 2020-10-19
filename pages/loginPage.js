@@ -35,18 +35,12 @@ const commands = {
            httpOnly : false,
            secure   : false,
        })
-    },
-    async openMainPage() {
-        await this
-            .navigate()
-            .waitForElementVisible('@chart');
     }
+
 }
 
 module.exports = {
-    url: 'https://trading-options-demo.coinflex.com/',
     elements: {
-        chart: '#styles_chart__tR87p',
         email: '#login:email'
     },
     commands: [commands]
