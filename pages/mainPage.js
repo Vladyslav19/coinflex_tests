@@ -1,23 +1,32 @@
 module.exports = {
     url: 'https://trading-options-demo.coinflex.com/',
     elements: {
-        timeFrameSelector: 'input[class=styles_time__input]',
-        chart: '#styles_chart__tR87p'
+        timeFrameSelector: '.styles_time__input__2Qqvc',
+        chart: '#styles_chart__tR87p',
+        instrumentOver: '[data-id="over"]',
+        instrumentUnder: '[data-id="under"]',
+        instrumentHighLine: '[data-id="highline"]',
+        instrumentLowLine: '[data-id="lowline"]',
+        instrumentHighTouch: '[data-id="hightouch"]',
+        instrumentLowTouch: '[data-id="lowtouch"]',
+        instrumentDoubleNoTouch: '[data-id="double_no_touch"]',
+        instrumentTunnel: '[data-id="tunnel"]',
+        instrumentOverTugOfWar: '[data-id="over_tug_of_war"]',
+        instrumentUnderTugOfWar: '[data-id="under_tug_of_war"]'
     },
 
     commands: [{
-        setTimeFrame(frameValue) {
-            this.click('@timeFrameSelector');
-            this.waitForElementVisible('@timeFrameSelector');
-            this.page.mainPage.getElementByText('@timeFrameSelector', frameValue)
+        async setTimeFrame(browser, frameValue) {
+            await browser.click('@timeFrameSelector');
+            await browser.waitForElementVisible('@timeFrameSelector');
+            await browser.getElementByText('@timeFrameSelector', frameValue)
         },
-        getElementByText(selector, text) {
+        async getElementByText(browser, selector, text) {
             let element = null;
-            client.pause(1000);
-            this.elements('css selector', selector, function (elements) {
+            await browser.elements('css selector', selector, async function (elements) {
                 let success = false;
                 for (let i = 0; i < elements.value.length && success === false; i++) {
-                    this.elementIdText(elements.value[i].ELEMENT, result => {
+                    await browser.elementIdText(elements.value[i].ELEMENT, result => {
                         if (result.value === text) {
                             success = true;
                             element = elements.value[i].ELEMENT;
@@ -25,7 +34,7 @@ module.exports = {
                     });
                 }
             });
-            this.perform(function () {
+            browser.perform(function () {
                 if (element === null) {
                     throw new TypeError(`Element
                     was
@@ -35,7 +44,7 @@ module.exports = {
                 )
                     ;
                 } else {
-                    this.elementIdClick(element);
+                    browser.elementIdClick(element);
                 }
             })
         },
@@ -43,6 +52,11 @@ module.exports = {
             await this
                 .navigate()
                 .waitForElementVisible('@chart');
+        },
+        async selectInstrument(instrumentName) {
+            await this
+                .click(`@instrument${instrumentName}`)
+                .pause(3000);
         }
     }]
 
